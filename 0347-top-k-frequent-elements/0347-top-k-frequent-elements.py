@@ -15,13 +15,13 @@ class Solution:
         # Place each number in the 'freq' list according to its frequency
         for n, c in count.items(): # starting loop on every key : value pair
             # Append the number 'n' to the sublist in 'freq' at index 'c', where 'c' is the frequency of 'n'
-            freq[c].append(n) # this number 'n' appears exactly 'c' number of times
+            freq[c].append(n) # now this number 'n' appears exactly 'c' number of times, hence the bucket sort(list) is ready
 
         # initialized Result list to store the top k frequent elements
         res = []
 
-        # Iterate through the 'freq' list from the highest possible frequency to the lowest
-        for i in range(len(freq) - 1, 0, -1):  # Start from the end of 'freq' to ensure we get the most frequent elements first
+        # Iterate through the 'freq' list in descending order to return desired output list
+        for i in range(len(freq) - 1, 0, -1):
             # Check numbers with frequency 'i'
             for n in freq[i]:
                 # Add number 'n' to the result list 'res'
