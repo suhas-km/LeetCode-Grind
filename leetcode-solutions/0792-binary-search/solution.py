@@ -1,18 +1,20 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        start = 0
-        end = len(nums) - 1
-
-        while start <= end:
-            mid = start + (end - start) // 2
+        i = 0
+        j = len(nums) - 1
+        
+        while i <= j:
+            # apply when it is sorted
+            mid =  (i + j)//2     # // is for integer division - round of for floor value
 
             if target == nums[mid]:
                 return mid
 
             elif target < nums[mid]:
-                end = mid - 1
-
+                j = mid-1
+                
             else:
-                start = mid + 1
-
+                i = mid+1
+                
+                 
         return -1
