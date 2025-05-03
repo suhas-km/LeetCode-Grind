@@ -1,0 +1,26 @@
+name: Sync LeetCode Solutions
+
+# Triggers: Manual run or automatic weekly sync
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *"  # Runs daily at 08:00 UTC (4:00 AM EDT)
+
+# Explicitly set permissions to avoid integration access errors
+permissions:
+  contents: write  # Needed to write solutions to repository
+
+jobs:
+  sync-leetcode:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync LeetCode Solutions
+        uses: joshcai/leetcode-sync@v1.7
+        with:
+          github-token: ${{ github.token }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          destination-folder: leetcode-solutions  # Optional: Change to your preferred folder
+          verbose: true  # Adds submission percentiles and question numbers
+          commit-header: "[LeetCode Sync]"  # Customize commit message prefix
+          filter-duplicate-secs: 86400  # Default: Ignore duplicate solutions within 24 hours
