@@ -4,13 +4,14 @@ class Solution:
         nums.sort()
 
         for i, a in enumerate(nums):
-            if i > 0 and a == nums[i -1]: # possible first value and avoiding reusing old value
-                continue # continue to next number if so (Skip to next)
-            
-            # two-sum logic from here - sorted array
-            l, r = i + 1, len(nums) - 1 
+            if i > 0 and nums[i] == nums[i-1]: # skip logic
+                continue
+
+            l, r = i + 1, len(nums) - 1
+
             while l < r:
                 threeSum = a + nums[l] + nums[r]
+
                 if threeSum > 0:
                     r -= 1
                 elif threeSum < 0:
@@ -20,5 +21,5 @@ class Solution:
                     l += 1
                     while nums[l] == nums[l-1] and l<r:
                         l+=1
-        
+
         return res
