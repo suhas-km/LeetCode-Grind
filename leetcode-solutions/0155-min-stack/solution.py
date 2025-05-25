@@ -1,24 +1,25 @@
 class MinStack:
-
     def __init__(self):
-        self.st = []
+        # monotonically decreasing stack problem
+        self.stack = []
+        self.min_stack = []
 
-    def push(self, val: int) -> None:
-        min_val = self.getMin()
-        if min_val == None or min_val > val:
-            min_val = val
-        
-        self.st.append([val, min_val])
+    def push(self, val):
+        self.stack.append(val)
+        if not self.min_stack or val <= self.min_stack[-1]:
+            self.min_stack.append(val)
 
-    def pop(self) -> None:
-        self.st.pop()
+    def pop(self):
+        popped = self.stack.pop()
+        if popped == self.min_stack[-1]:
+            self.min_stack.pop()
+        return popped
 
-    def top(self) -> int:
-        return self.st[-1][0] if self.st else None
+    def top(self):
+        return self.stack[-1]
 
-    def getMin(self) -> int:
-        return self.st[-1][1] if self.st else None
-        
+    def getMin(self):
+        return self.min_stack[-1]
 
 
 # Your MinStack object will be instantiated and called as such:
