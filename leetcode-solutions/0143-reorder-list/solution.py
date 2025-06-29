@@ -8,7 +8,7 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        # find the middle
+        # find the middle with floyds slow and fast tortoise
         slow, fast = head, head.next
 
         while fast and fast.next:
