@@ -17,6 +17,7 @@ class Solution:
                 list2 = list2.next
             curr = curr.next
 
+        # final edge case
         if list1:
             curr.next = list1
         elif list2:
