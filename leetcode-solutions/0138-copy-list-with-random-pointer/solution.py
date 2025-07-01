@@ -9,22 +9,19 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        oldToCopy = { None: None}
-        
-        # First pass — create new nodes in the hashmap without linking
+        realToCopy = { None: None}
+
         cur = head
         while cur:
             copy = Node(cur.val)
-            oldToCopy[cur] = copy
+            realToCopy[cur] = copy
             cur = cur.next
         
-        # Second pass — assign next and random pointers
         cur = head
         while cur:
-            copy = oldToCopy[cur]
-            copy.next = oldToCopy[cur.next]
-            copy.random = oldToCopy[cur.random]
+            copy = realToCopy[cur]
+            copy.next = realToCopy[cur.next]
+            copy.random = realToCopy[cur.random]
             cur = cur.next
-        
-        return oldToCopy[head]
 
+        return realToCopy[head]
