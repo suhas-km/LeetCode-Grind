@@ -8,17 +8,18 @@ class Solution:
         num1, num2 = 0, 0
         mul = 1
 
-        #342 = 2*1 + 4*10 + 3*100
+        # num1 = 342 -> 3*100 + 4*20 + 2*1
         while l1 or l2:
             if l1:
                 num1 += l1.val * mul
                 l1 = l1.next
-            if l2:
+            if l2:  # changed from elif to if to allow both to contribute in same iteration
                 num2 += l2.val * mul
                 l2 = l2.next
             mul *= 10
-        
-        total = num1 + num2
+
+        total = int(num1) + int(num2)
+
         dummy = ListNode()
         head = dummy
 
@@ -26,11 +27,11 @@ class Solution:
             return ListNode(0)
 
         while total > 0:
-            currDigit = total % 10 #to get the last digit
-            total = total // 10 #to remove the last digit
-            dummy.next = ListNode(currDigit)
+            currDigit = total % 10 #extract reminder
+            total = total // 10 #remove digit - floor value
+            
+            dummy.next = ListNode(currDigit) #create node with reminder
             dummy = dummy.next
-        
-        
 
         return head.next
+
