@@ -15,18 +15,3 @@ class Solution:
         
         # Return the values of the hash table, which are lists of anagrams
         return list(anagrams.values())
-        
-        
-
-### SOLUTION 2 ####
-#         res = defaultdict(list) 
-
-#         for s in strs:
-#             count = [0] * 26 #a...z - array for the 26 charecters
-
-#             for c in s:
-#                 count[ord(c) - ord("a")] += 1
-
-#             res[tuple(count)].append(s)
-
-#         return res.values()
