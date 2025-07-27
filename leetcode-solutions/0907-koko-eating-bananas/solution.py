@@ -3,23 +3,21 @@
 
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        l, r = 1, max(piles)  # Search space: 1 to the largest pile
-        res = r  # Start with the max possible speed as the worst case
+        l, r = 1, max(piles) # range of possible "k"
+        res = r
 
         while l <= r:
-            k = (l + r) // 2  # Midpoint guess for eating speed
-            hours = 0
+            m = (l + r) // 2
+            timeTaken = 0
 
-            # Calculate total hours needed at speed k
-            for p in piles:
-                hours += math.ceil(p / k)
+            for pile in piles:
+                timeTaken += math.ceil(pile/m)    # calculate time taken for each pile
+            
+            if timeTaken <= h:
+                res = min(m, res)
+                r = m - 1
 
-            # If possible within h hours, try to lower speed
-            if hours <= h:
-                res = min(res, k)
-                r = k - 1
-            else:  # Too slow, need to increase speed
-                l = k + 1
-
-        return res  # Minimum valid speed found
-
+            else:
+                l = m + 1
+            
+        return res
