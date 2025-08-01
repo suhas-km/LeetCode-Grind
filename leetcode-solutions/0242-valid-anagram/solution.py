@@ -13,7 +13,7 @@ class Solution:
                 hm2[j] = 1
             hm2[j] += 1
 
-        if hm == hm2:
-            return True
-        return False
-        
+        # if hm == hm2:
+        #     return True
+        return hm == hm2
+    
