@@ -1,14 +1,21 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-         # O(1) time 
-        if k == len(nums):
+        if len(nums) == k:
             return nums
-        
-        # 1. Build hash map: character and how often it appears
-        # O(N) time
-        count = Counter(nums)   
-        # 2-3. Build heap of top k frequent elements and
-        # convert it into an output array
-        # O(N log k) time
-        return heapq.nlargest(k, count.keys(), key=count.get) 
 
+        maxHeap = []
+        res = []
+
+        count = Counter(nums)
+
+        for i, v in count.items():
+            maxHeap.append([-v, i])
+        
+        heapq.heapify(maxHeap)
+
+        while k > 0:
+            op = heapq.heappop(maxHeap)
+            res.append(op[1])
+            k -= 1
+
+        return res
