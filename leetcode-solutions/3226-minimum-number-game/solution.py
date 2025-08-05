@@ -6,6 +6,8 @@ class Solution:
         Remove - alice and bob remove the smallest element, in the same order
         Append - Bob appends first followed by alice, until nums is empty
 
+        Time: O(n logn)
+        Space: O(1)
         """
 
         nums.sort()
