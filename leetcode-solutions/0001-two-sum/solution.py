@@ -1,12 +1,19 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        seen = {} # hashmap for seen values to find in o(1)\
+        """
+        """
+
+        hm = {}
         
-        for i, value in enumerate(nums):
-            remaining = target - nums[i]
-
-            if remaining in seen:
-                return i, seen[remaining]
+        for i, num in enumerate(nums):
+            if not hm:
+                hm[num] = i
+                continue
+            
+            complement = target - num
+            
+            if complement in hm:
+                print(hm)
+                return [hm[complement], i]
             else:
-                seen[value] = i
-
+                hm[num] = i
