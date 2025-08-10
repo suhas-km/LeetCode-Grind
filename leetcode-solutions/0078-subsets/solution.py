@@ -1,21 +1,22 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         res = []
-        subset = []
 
-        def dfs(i):
-            if i >= len(nums):
-                res.append(subset.copy()) # out of bound - base case
+        # [1,2,3] -> 3 while last index is supposed to be 2
+
+        def backtrack(subset, i):
+            if i > len(nums) - 1:
+                res.append(subset[:])
                 return
             
-            # decide the choose the val
             subset.append(nums[i])
-            dfs(i + 1)
-
-            # decided not to and go ahead
+            left = backtrack(subset, i+1)
             subset.pop()
-            dfs(i + 1)
+            right = backtrack(subset, i+1)
+            # subset.pop()
+    
+            
+        backtrack([], 0)
 
-        dfs(0) # 0th index
         return res
 
