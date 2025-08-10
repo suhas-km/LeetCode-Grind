@@ -1,22 +1,26 @@
 class Solution:
-    def combinationSum(self, candidates, target):
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
+        total = 0
 
-        def backtrack(i, total, subset):
+        def backtrack(combination, i):
+        # base case update the total to 0
+            nonlocal total
             if total == target:
-                res.append(subset.copy()) # cause: later pops will mutate saved solutions if not
+                res.append(combination.copy())
                 return
-            if i == len(candidates) or total > target:
+            
+            if total > target or i >= len(candidates):
                 return
-
-            # left: pick candidates[i]
-            subset.append(candidates[i])
-            backtrack(i, total + candidates[i], subset)  # reuse same i
-            subset.pop()
-
-            # right: skip candidates[i]
-            backtrack(i + 1, total, subset)
-
-        backtrack(0, 0, [])
+            
+            combination.append(candidates[i])
+            total += candidates[i]
+            backtrack(combination, i)
+            combination.pop()
+            
+            total -= candidates[i]
+            backtrack(combination, i + 1)
+            # combination.pop()
+            
+        backtrack([], 0)
         return res
-
