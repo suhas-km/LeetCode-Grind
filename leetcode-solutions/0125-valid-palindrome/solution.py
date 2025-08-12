@@ -1,9 +1,21 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        newStr = ""
+        l, r = 0, len(s) - 1
+
+        while l < r:
+            # Skip non-alphanumeric from left
+            if not s[l].isalnum():
+                l += 1
+                continue
+            # Skip non-alphanumeric from right
+            if not s[r].isalnum():
+                r -= 1
+                continue
+            # Compare after converting to lowercase
+            if s[l].lower() != s[r].lower():
+                return False
+            l += 1
+            r -= 1
         
-        for c in s:
-            if c.isalnum(): #  alphanumeric-> i.e. letters (a-z, A-Z) or numbers (0-9). 
-                            # If string contains only alphanumeric characters and is not empty, isalnum() returns True
-                newStr += c.lower()
-        return newStr == newStr[::-1]
+        return True
+
