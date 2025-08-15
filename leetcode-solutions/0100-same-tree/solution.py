@@ -4,28 +4,23 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 # Recursive check: both nodes must be present, hold the same value,
 # and their corresponding sub-trees must also be identical.
 # Recursive check: both nodes must be present, hold the same value,
 # and their corresponding sub-trees must also be identical.
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        if not p and not q:          # both empty → same
+        if not p and not q:
             return True
-        if not p or not q:           # one empty, one not → different
+        if not q or not p:
             return False
-        if p.val != q.val:           # values differ → different
+        if p.val != q.val:
             return False
-        # recurse on left and right children
-        return (self.isSameTree(p.left, q.left) and
-                self.isSameTree(p.right, q.right))
+        
+        left = self.isSameTree(p.left, q.left)
+        right = self.isSameTree(p.right, q.right)
 
+        return left and right
 
-# If you prefer a standalone function ☟
-def solution(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-    if not p and not q:
-        return True
-    if not p or not q or p.val != q.val:
-        return False
-    return solution(p.left, q.left) and solution(p.right, q.right)
 
