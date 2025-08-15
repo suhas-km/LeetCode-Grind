@@ -5,22 +5,41 @@
 #         self.left = left
 #         self.right = right
 
-# Recursive check: both nodes must be present, hold the same value,
-# and their corresponding sub-trees must also be identical.
-# Recursive check: both nodes must be present, hold the same value,
-# and their corresponding sub-trees must also be identical.
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        if not p and not q:
-            return True
-        if not q or not p:
-            return False
-        if p.val != q.val:
-            return False
         
-        left = self.isSameTree(p.left, q.left)
-        right = self.isSameTree(p.right, q.right)
+        def dfs(p, q):
+            if not p and not q:
+                return True
+            
+            if not p or not q:
+                return False
+            
+            if p.val != q.val:
+                return False
 
-        return left and right
+            left = dfs(p.left, q.left)
+            right = dfs(p.right, q.right)
 
+            return left and right
+        
+        return dfs(p, q)
+
+
+        # def dfs(p, q):
+        #     if not p and not q:
+        #         return True
+            
+        #     if not p or not q:
+        #         return False
+            
+        #     if p.val != q.val:
+        #         return False
+            
+        #     left = dfs(p.left, q.left)
+        #     right = dfs(p.right, q.right)
+
+        #     return left and right
+            
+        # return dfs(p, q)
 
