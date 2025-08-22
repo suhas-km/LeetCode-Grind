@@ -4,6 +4,8 @@ class Solution:
         ROWS, COLS = len(grid), len(grid[0])
         maxArea = 0
 
+        # dfs call()
+        
         def dfs(r, c):
             if r >= ROWS or r < 0 or c >= COLS or c < 0 or (r,c) in visited or grid[r][c] != 1:
                 return 0
