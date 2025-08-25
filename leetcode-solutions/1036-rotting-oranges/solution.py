@@ -15,15 +15,13 @@ class Solution:
                 
         if freshOrange == 0:
             return 0
-
         
-        directions = [(0, 1),(0, -1),(1, 0),(-1, 0)]
+        directions = [(0, 1),(0, -1),(1, 0),(-1, 0)] # to be used to execute bfs calls
         level = -1 # because you dont want to increase the timer by 1 for last level rotten oranges
         
         while rotten:
             level += 1
             for i in range(len(rotten)):
-
                 currRow, currCol = rotten.popleft()
                 visited.add((currRow, currCol))
                 for dx, dy in directions:
