@@ -1,6 +1,7 @@
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         # # monotonic decreasing order - retriving a result in linear time!
+        
         answer = [0] * len(temperatures)
         stack = []
 
