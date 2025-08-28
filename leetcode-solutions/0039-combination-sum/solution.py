@@ -5,7 +5,7 @@ class Solution:
 
         def backtrack(combination, i):
         # base case update the total to 0
-        
+
             nonlocal total
             if total == target:
                 res.append(combination.copy())
@@ -20,8 +20,8 @@ class Solution:
             combination.pop()
             
             total -= candidates[i]
-            backtrack(combination, i + 1)
-            # combination.pop()
+            backtrack(combination, i + 1) # combination.pop()
+            
             
         backtrack([], 0)
         return res
