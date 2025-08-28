@@ -5,6 +5,7 @@ class Solution:
 
         def backtrack(combination, i):
         # base case update the total to 0
+        
             nonlocal total
             if total == target:
                 res.append(combination.copy())
