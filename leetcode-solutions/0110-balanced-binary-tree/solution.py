@@ -6,20 +6,21 @@
 #         self.right = right
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        balanced = [True]
+        balanced = True
 
-        def height(root):
+        def dfs(root):
+            nonlocal balanced
+            
             if not root:
                 return 0
             
-            left = height(root.left)
-            right = height(root.right)
+            left = dfs(root.left)
+            right = dfs(root.right)
 
             if abs(left - right) > 1:
-                balanced[0] = False
-                return 0
-            
+                balanced = False
+
             return 1 + max(left, right)
         
-        height(root)
-        return balanced[0]
+        dfs(root)
+        return balanced
