@@ -1,19 +1,21 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        """
-        """
+        seen = {}
 
-        hm = {}
-        
-        for i, num in enumerate(nums):
-            if not hm:
-                hm[num] = i
-                continue
+        for i, value in enumerate(nums):
+
+            complement = target - nums[i]
+
+            if complement in seen:
+                return [i, seen[complement]]
             
-            complement = target - num
-            
-            if complement in hm:
-                print(hm)
-                return [hm[complement], i]
             else:
-                hm[num] = i
+                seen[value] = i
+
+        # O(n^2) Solution:
+
+        # for i in range(len(nums)):
+        #     for j in range(i+1, len(nums)):  # start at i+1 to avoid duplicate pairs
+        #         if nums[i] + nums[j] == target:
+        #             return [i, j]
+
