@@ -7,6 +7,8 @@
 
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+
+        # backtracking style
         def dfs(p, q):
             if not p and not q:
                 return True
