@@ -1,9 +1,19 @@
+from collections import Counter
+
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        # Create Counter objects for the ransomNote and magazine strings
-        note, mag = Counter(ransomNote), Counter(magazine)
-        
-        # Check if the intersection of note and mag Counter objects is equal to note Counter object
-        # If it is, it means that all the letters in ransomNote can be formed using the letters in magazine
-        if note & mag == note: return True
-        return False
+        # This initial check is a great optimization.
+        if len(ransomNote) > len(magazine):
+            return False
+
+        # Get character counts of the magazine.
+        magazine_counts = Counter(magazine)
+
+        # Check if the magazine has enough of each character needed for the note.
+        for char in ransomNote:
+            if magazine_counts[char] > 0:
+                magazine_counts[char] -= 1  # Use up one character
+            else:
+                return False  # Not enough of this character available
+
+        return True
