@@ -12,16 +12,13 @@ class Solution:
         Space: O(1) -> max size of hashmap is numbers of alphabets regardless of input size
         """
 
-        seen = {}
+        # 1. Build a frequency count
+        counts = collections.Counter(s)
 
-        for i in range(len(s)):
-            if s[i] in seen:
-                seen[s[i]][1] += 1
-            else:
-                seen[s[i]] = [i, 1]
-        
-        for _, value in seen.items():
-            if value[1] == 1:
-                return value[0]
-        
+        # 2. Find the first character with a count of 1
+        for i, char in enumerate(s):
+            if counts[char] == 1:
+                return i
+
         return -1
+
