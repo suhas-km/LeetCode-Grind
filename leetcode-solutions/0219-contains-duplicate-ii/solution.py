@@ -1,16 +1,21 @@
 class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
-        # Dictionary to store the most recent index of each value
-        index_map = {}
+        # 'seen' will store the number as the key and its last seen index as the value.
+        seen = {}
 
-        # Iterate over the list, using `i` as the index
-        for i, value in enumerate(nums):
-            if value in index_map:
-        # Check if the current index and the stored index are within `k`distance
-                if i - index_map[value] <= k:
+        for i in range(len(nums)):
+            current_number = nums[i]
+            
+            # Check if we've seen this number before.
+            if current_number in seen:
+                # If seen, check if the distance between indices is within k.
+                previous_index = seen[current_number]
+                if i - previous_index <= k:
                     return True
-        # Update the dictionary with the most recent index of this value
-            index_map[value] = i
-        
-        return False
+            
+            # Whether we found a duplicate or not, update the map with the current index.
+            # This ensures we always have the most recent index for any number.
+            seen[current_number] = i
 
+        # If the loop completes, no such duplicate was found.
+        return False
