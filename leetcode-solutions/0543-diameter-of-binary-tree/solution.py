@@ -19,11 +19,11 @@ class Solution:
             right = dfs(root.right)
 
             dia = left + right
-            maxDia = max(maxDia, dia)
+            maxDia = max(maxDia, dia) # check if maxDia reached
 
             return 1 + max(left, right)
         
         dfs(root)
 
         return maxDia
-        
+           
