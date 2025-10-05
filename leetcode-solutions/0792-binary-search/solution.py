@@ -1,20 +1,20 @@
+from typing import List
+
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        i = 0
-        j = len(nums) - 1
-        
-        while i <= j:
-            # apply when it is sorted
-            mid =  (i + j)//2     # // is for integer division - round of for floor value
+        l, r = 0, len(nums) - 1
 
-            if target == nums[mid]:
+        while l <= r:
+            mid = (l + r) // 2
+
+            if nums[mid] == target:
                 return mid
-
-            elif target < nums[mid]:
-                j = mid-1
-                
-            else:
-                i = mid+1
-                
-                 
+            
+            elif nums[mid] > target:
+                r = mid - 1
+            
+            else: # nums[mid] < target
+                l = mid + 1
+        
+        # If the loop ends, the target was not found.
         return -1
