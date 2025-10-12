@@ -1,16 +1,23 @@
+from typing import List
+
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        res = max(nums) # returing atleast the maximum and avoid returning 0
-        curMax, curMin = 1, 1 # neutral value
-        
-        for n in nums:
-            if n == 0:
-                curMax, curMin = 1, 1 # resetting the values to avoid returning 0 as the product
-                continue
-                
-            tmp = curMax * n # we do this to use the old curMax i.e. from the previous loop and use it to find curMin
-            curMax = max(n * curMax, n * curMin, n) # multiplying n with both maxuimums and minimums to find the max
-            curMin = min(tmp, n * curMin, n)
+        if not nums:
+            return 0
+
+        # Initialize trackers with the first element.
+        res = nums[0]
+        curMin, curMax = nums[0], nums[0]
+
+        # Iterate from the second element.
+        for n in nums[1:]:
+            # When we see a negative number, the old max becomes the new min and vice versa.
+            # We must store the old curMax to use it in the curMin calculation.
+            old_curMax = curMax * n
+            
+            curMax = max(n, old_curMax, curMin * n)
+            curMin = min(n, old_curMax, curMin * n)
+
             res = max(res, curMax)
         
         return res
