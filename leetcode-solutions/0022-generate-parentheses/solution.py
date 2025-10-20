@@ -1,12 +1,11 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        # keep track of number of open and close in each call
-        # only add open paranthesis if open < n
-        # add a closing bracket only if closeed < open
-        # return/valid IFF open == closed == 'n'
+        # only add if open < n
+        # only add a closing parathesis if closed < open
+        # valid IIF open == closed == n # basecase
 
-        stack = [] # hold the paranthesis
-        res = [] # list of valid paranthesis combinations
+        stack = []
+        res = []
 
         def backtrack(openN, closedN):
             if openN == closedN == n:
