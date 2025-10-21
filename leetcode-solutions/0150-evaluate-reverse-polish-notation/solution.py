@@ -19,6 +19,7 @@ class Solution:
                     result = num2 * num1
                 else:  # token == '/'
                     # Use int() to truncate toward zero (required by problem)
+                    
                     result = int(num2 / num1)
                 stack.append(result)
         
