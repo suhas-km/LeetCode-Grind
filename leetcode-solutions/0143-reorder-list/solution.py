@@ -17,6 +17,7 @@ class Solution:
 
         # reverse the second half
         second = slow.next
+        
         prev = slow.next = None
 
         while second:
