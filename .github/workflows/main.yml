@@ -4,7 +4,7 @@ name: Sync LeetCode Solutions
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * *"  # Runs daily at 08:00 UTC (4:00 AM EDT)
+    - cron: "0 12 * * *"  # Runs daily at 04:00 AM PST (12:00 UTC)
 
 # Explicitly set permissions to avoid integration access errors
 permissions:
