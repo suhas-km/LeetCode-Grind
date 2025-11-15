@@ -1,24 +1,22 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # counter and reverse the hm's key:value -> key(value):value(key)
+        hm = defaultdict(int)
+
+        for num in nums:
+            hm[num] += 1
         
-        eleToFreq = Counter(nums)
         res = []
-        freqToEle = defaultdict(list)
 
-        for key, val in eleToFreq.items():
-            freqToEle[val].append(key)
+        hm2 = defaultdict(list)
+        for i, val in hm.items():
+            hm2[val].append(i)
         
-        maxFreq = max(freqToEle.keys())
-        minFreq = min(freqToEle.keys())
-
-        for freq in range(maxFreq, minFreq - 1, -1):
-            if freq in freqToEle:
-                for ele in freqToEle[freq]:
-                    if len(res) < k:
-                        res.append(ele)
-            if len(res) == k:
-                break
+        for i in range(len(nums), -1, -1):
+            if i in hm2:
+                for element in hm2[i]:
+                    res.append(element)
+                    if len(res) == k:
+                        return res
 
         return res
 
