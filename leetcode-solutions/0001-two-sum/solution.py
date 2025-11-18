@@ -4,7 +4,7 @@ class Solution:
 
         for i, value in enumerate(nums):
 
-            complement = target - nums[i]
+            complement = target - value
 
             if complement in seen:
                 return [i, seen[complement]]
