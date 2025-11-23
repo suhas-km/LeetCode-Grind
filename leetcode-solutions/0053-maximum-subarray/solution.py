@@ -1,6 +1,6 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        maxSum = nums[0]
+        maxSubSum = nums[0]
         curSum = 0
 
         for num in nums:
@@ -8,6 +8,7 @@ class Solution:
                 curSum = 0
             
             curSum += num
-            maxSum = max(maxSum, curSum)
+            
+            maxSubSum = max(maxSubSum, curSum)
         
-        return maxSum
+        return maxSubSum
