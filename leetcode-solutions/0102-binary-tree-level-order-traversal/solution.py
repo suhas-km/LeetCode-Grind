@@ -9,6 +9,7 @@ class Solution:
         if not root:
             return []
 
+        # each level start list
         q = collections.deque()
         res = []
         q.append(root)
@@ -17,6 +18,7 @@ class Solution:
             res2 = []
             for i in range(len(q)):
                 currNode = q.popleft()
+
                 if currNode.left:
                     q.append(currNode.left)
                 if currNode.right:
@@ -25,4 +27,5 @@ class Solution:
                 res2.append(currNode.val)
             
             res.append(res2[:])
+        
         return res
