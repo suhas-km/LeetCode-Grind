@@ -1,18 +1,17 @@
 class Solution:
     def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
-        if len(arr1) > len(arr2): # pick the smaller list
+        if len(arr1) > len(arr2):
             arr1, arr2 = arr2, arr1
-
-        prefix_set = set()
-        for n in arr1:
-            while n and n not in prefix_set: # non-zero and not in set
-                prefix_set.add(n)
+        
+        prefixSet = set()
+        for n in arr1: # every values prefix values to be put into set
+            while n and n not in prefixSet: # while n is non-zero and not in visited
+                prefixSet.add(n)
                 n = n // 10
         
-        res = 0 
+        res = 0
         for num in arr2:
-            while num and num not in prefix_set: # non-zero and not in set
-                print(num)
+            while num and num not in prefixSet: # if this value is invalid aka. not a valid number -> num // 10
                 num = num // 10
             
             if num != 0:
