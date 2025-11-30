@@ -4,20 +4,21 @@ class Solution:
         adjPairs = 0
         res = []
 
-        for idx, color in queries:
-            left = colors[idx - 1] if idx > 0 else 0
-            right = colors[idx + 1] if idx < len(colors) - 1 else 0
+        for i, color in queries:
+            left = colors[i - 1] if i > 0 else 0
+            right = colors[i + 1] if i < len(colors) - 1 else 0
 
-            if colors[idx] != 0 and colors[idx] == right:
+            if colors[i] != 0 and colors[i] == right:
                 adjPairs -= 1
-            if colors[idx] != 0 and colors[idx] == left:
+            if colors[i] != 0 and colors[i] == left:
                 adjPairs -= 1
+            
+            colors[i] = color
 
-            colors[idx] = color
-
-            if colors[idx] == right:
+            if colors[i] == right:
                 adjPairs += 1
-            if colors[idx] == left:
+            
+            if colors[i] == left:
                 adjPairs += 1
             
             res.append(adjPairs)
