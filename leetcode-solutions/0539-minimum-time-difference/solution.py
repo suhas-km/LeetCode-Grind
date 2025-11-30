@@ -1,19 +1,19 @@
 class Solution:
     def findMinDifference(self, timePoints: List[str]) -> int:
-        timePoints.sort() #n* log n
+        timePoints.sort()
 
-        def time_to_min(t):
+        def timeToMin(t):
             h, m = map(int, t.split(":"))
-            total = h * 60 + m
-            return total
+            # h, m = int(h), int(m)
+            return h * 60 + m
         
-        # assign res to max:
-        res = (24 * 60 - time_to_min(timePoints[-1]) + time_to_min(timePoints[0]))
+        minDiff = (24 * 60 - timeToMin(timePoints[-1]) + timeToMin(timePoints[0]))
 
         for time in range(len(timePoints) - 1):
-            cur = time_to_min(timePoints[time + 1])
-            prev = time_to_min(timePoints[time])
+            cur = timeToMin(timePoints[time+1])
+            prev = timeToMin(timePoints[time])
             diff = cur - prev
-            res = min(res, diff)
+            minDiff = min(minDiff, diff)
         
-        return res
+        return minDiff
+
