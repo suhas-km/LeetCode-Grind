@@ -1,19 +1,26 @@
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        merged = []
-        i = 0
+        result = []
+        inserted = False
 
-        while i < len(intervals) and intervals[i][1] < newInterval[0]:
-            merged.append(intervals[i])
-            i += 1
+        for interval in intervals:
+            # Case 1: interval is completely before newInterval → add it
+            if interval[1] < newInterval[0]:
+                result.append(interval)
+            # Case 2: interval is completely after newInterval → time to insert
+            elif interval[0] > newInterval[1]:
+                if not inserted:
+                    result.append(newInterval)
+                    inserted = True
+                result.append(interval)
+            # Case 3: overlap → merge
+            else:
+                newInterval[0] = min(newInterval[0], interval[0])
+                newInterval[1] = max(newInterval[1], interval[1])
         
-        while i < len(intervals) and intervals[i][0] <= newInterval[1]:
-            newInterval = [min(newInterval[0], intervals[i][0]), max(newInterval[1], intervals[i][1])]
-            i += 1
-        merged.append(newInterval)
-        
-        while i < len(intervals):
-            merged.append(intervals[i])
-            i += 1
-        
-        return merged
+        # If never inserted (e.g., newInterval goes at end)
+        if not inserted:
+            result.append(newInterval)
+            
+        return result
+
