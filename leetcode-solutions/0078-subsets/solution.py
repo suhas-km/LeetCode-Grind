@@ -1,22 +1,22 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         res = []
+        n = len(nums)
+        path = []
 
-        # [1,2,3] -> 3 while last index is supposed to be 2
-
-        def backtrack(subset, i):
-            if i > len(nums) - 1:
-                res.append(subset[:])
+        def backtrack(i):
+            if i == n:
+                res.append(path.copy())  # <-- call .copy()
                 return
             
-            subset.append(nums[i])
-            left = backtrack(subset, i+1)
-            subset.pop()
-            right = backtrack(subset, i+1)
-            # subset.pop()
-    
-            
-        backtrack([], 0)
+            # choice 1: don't include nums[i]
+            backtrack(i + 1)
 
-        return res
+            # choice 2: include nums[i]
+            path.append(nums[i])
+            backtrack(i + 1)
+            path.pop()
+
+        backtrack(0)   # <-- start recursion
+        return res     # <-- return result
 
