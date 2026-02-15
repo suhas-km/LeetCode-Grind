@@ -17,4 +17,5 @@ class Solution:
             return False
 
         return self.isSameTree(p.right, q.right) and self.isSameTree(p.left, q.left)
+    # have to get true for the left and the right subtree's of the root node
     
