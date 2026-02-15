@@ -4,11 +4,11 @@ class Solution:
         curSum = 0
 
         for num in nums:
+            # skipping negetive scenarios
             if curSum < 0:
                 curSum = 0
             
             curSum += num
-            
             maxSubSum = max(maxSubSum, curSum)
         
         return maxSubSum
