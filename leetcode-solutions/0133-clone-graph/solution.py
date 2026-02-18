@@ -11,18 +11,19 @@ class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
             return None
-
-        oldToNew = {}                 # {old_node: new_node}
+        
+        oldToNew = {}
         q = collections.deque([node])
-        oldToNew[node] = Node(node.val)  # create clone for the start node
+        oldToNew[node] = Node(node.val)
 
         while q:
             curr = q.popleft()
             for nei in curr.neighbors:
                 if nei not in oldToNew:
-                    oldToNew[nei] = Node(nei.val)  # create clone when first seen
+                    oldToNew[nei] = Node(nei.val)
                     q.append(nei)
-                # connect cloned current -> cloned neighbor
-                oldToNew[curr].neighbors.append(oldToNew[nei])
 
+                oldToNew[curr].neighbors.append(oldToNew[nei])
+        
         return oldToNew[node]
+
